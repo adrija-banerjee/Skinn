@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acne Level Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Acne Level Predictor</h1>
+        <div class="video-container">
+            <video id="video" width="640" height="480" autoplay></video>
+            <button id="capture">Capture Image</button>
+        </div>
+        <div class="upload-container">
+            <input type="file" id="upload" accept="image/*">
+            <button id="upload-btn">Upload Image</button>
+        </div>
+        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+        <h2>Captured/Uploaded Image:</h2>
+        <img id="capturedImage" width="640" height="480" />
+        <p id="result"></p>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
