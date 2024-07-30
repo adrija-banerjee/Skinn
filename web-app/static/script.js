@@ -14,16 +14,13 @@ navigator.mediaDevices.getUserMedia({ video: true })
     .catch(console.error);
 
 capture.addEventListener('click', () => {
-    // Ensure the camera is ready before capturing
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
         const context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         const dataUrl = canvas.toDataURL('image/jpeg');
         
-        // Display the captured image
         capturedImage.src = dataUrl;
 
-        // Send the captured image to the server for prediction
         fetch('/predict', {
             method: 'POST',
             headers: {
@@ -33,7 +30,7 @@ capture.addEventListener('click', () => {
         })
         .then(response => response.json())
         .then(data => {
-            result.textContent = `Predicted Acne Level: ${data.predicted_class}`;
+            result.textContent = `Predicted Acne Level: ${data.predicted_class_acne}, Skin Type: ${data.predicted_class_skin_type}`;
         })
         .catch(console.error);
     }
@@ -47,7 +44,6 @@ uploadBtn.addEventListener('click', () => {
             const dataUrl = reader.result;
             capturedImage.src = dataUrl;
             
-            // Send the uploaded image to the server for prediction
             fetch('/predict', {
                 method: 'POST',
                 headers: {
@@ -57,7 +53,7 @@ uploadBtn.addEventListener('click', () => {
             })
             .then(response => response.json())
             .then(data => {
-                result.textContent = `Predicted Acne Level: ${data.predicted_class}`;
+                result.textContent = `Predicted Acne Level: ${data.predicted_class_acne}, Skin Type: ${data.predicted_class_skin_type}`;
             })
             .catch(console.error);
         };
